@@ -1,6 +1,8 @@
-﻿namespace Entities.Concrete;
+﻿using Core.Abstract;
 
-public class Employee
+namespace Entities.Concrete;
+
+public class Employee: IEntity
 {
     public int EmployeeId { get; set; }
     public string EmployeeName { get; set; }

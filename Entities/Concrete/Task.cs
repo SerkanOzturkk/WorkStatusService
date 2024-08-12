@@ -1,6 +1,8 @@
-﻿namespace Entities.Concrete;
+﻿using Core.Abstract;
 
-public class Task
+namespace Entities.Concrete;
+
+public class Task : IEntity
 {
     public int TaskId { get; set; }
     public string TaskName { get; set; }

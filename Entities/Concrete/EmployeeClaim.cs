@@ -1,6 +1,8 @@
-﻿namespace Entities.Concrete;
+﻿using Core.Abstract;
 
-public class EmployeeClaim
+namespace Entities.Concrete;
+
+public class EmployeeClaim : IEntity
 {
     public int EmployeeClaimId { get; set; }
     public int EmployeeId { get; set; }

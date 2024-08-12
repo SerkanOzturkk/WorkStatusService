@@ -1,6 +1,8 @@
-﻿namespace Entities.Concrete;
+﻿using Core.Abstract;
 
-public class TimeLog
+namespace Entities.Concrete;
+
+public class TimeLog : IEntity
 {
     public int TimeLogId { get; set; }
     public int EmployeeId { get; set; }

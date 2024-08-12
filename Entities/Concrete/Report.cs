@@ -1,6 +1,8 @@
-﻿namespace Entities.Concrete;
+﻿using Core.Abstract;
 
-public class Report
+namespace Entities.Concrete;
+
+public class Report : IEntity
 {
     public int ReportId { get; set; }
     public string ReportType { get; set; }

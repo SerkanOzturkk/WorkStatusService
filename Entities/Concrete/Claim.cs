@@ -1,6 +1,8 @@
-﻿namespace Entities.Concrete;
+﻿using Core.Abstract;
 
-public class Claim
+namespace Entities.Concrete;
+
+public class Claim : IEntity
 {
     public int ClaimId { get; set; }
     public string ClaimName { get; set; }  // Example: "can_edit_tasks", "can_view_reports"
