@@ -1,15 +1,14 @@
-﻿using Core.Abstract;
+﻿
 using Core.Entities;
 
-namespace Entities.Concrete;
+namespace Entities.DTOs;
 
-public class Report : BaseEntity
+public class ReportDetailDto : IDto
 {
+    public int Id { get; set; }
     public string ReportType { get; set; }
     public DateTime ReportDate { get; set; }
-    public int TeamId { get; set; }
+    public string TeamName { get; set; }
     public int TotalTasksCompleted { get; set; }
     public int TotalTasksPending { get; set; }
-
-    public Team Team { get; set; }
 }
