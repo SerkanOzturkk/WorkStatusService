@@ -9,7 +9,7 @@ using Entities.Abstract;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class EfClaimDal : EfEntityRepositoryBase<Claim,WorkStatusContext>,IClaimDal
+    public class EfClaimDal : EfEntityRepositoryBase<OperationClaim,WorkStatusContext>,IClaimDal
     {
     }
 }

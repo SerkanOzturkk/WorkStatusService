@@ -18,7 +18,7 @@ namespace DataAccess.Concrete.EntityFramework
         public DbSet<Task> Tasks { get; set; }
         public DbSet<TimeLog> TimeLogs { get; set; }
         public DbSet<Report> Reports { get; set; }
-        public DbSet<Claim> Claims { get; set; }
+        public DbSet<OperationClaim> OperationClaims { get; set; }
         public DbSet<EmployeeClaim> EmployeeClaims { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -36,7 +36,7 @@ namespace DataAccess.Concrete.EntityFramework
             modelBuilder.Entity<Task>().ToTable("Tasks");
             modelBuilder.Entity<TimeLog>().ToTable("TimeLogs");
             modelBuilder.Entity<Report>().ToTable("Reports");
-            modelBuilder.Entity<Claim>().ToTable("Claims");
+            modelBuilder.Entity<OperationClaim>().ToTable("OperationClaims");
             modelBuilder.Entity<EmployeeClaim>().ToTable("EmployeeClaims");
 
             modelBuilder.Entity<Employee>()

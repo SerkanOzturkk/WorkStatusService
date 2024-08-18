@@ -14,7 +14,7 @@ public class EfEmployeeClaimDal : EfEntityRepositoryBase<EmployeeClaim, WorkStat
             var result = from ec in context.EmployeeClaims
                 join e in context.Employees
                     on ec.EmployeeId equals e.Id
-                    join c in context.Claims
+                    join c in context.OperationClaims
                     on ec.ClaimId equals c.Id
                 select new EmployeeClaimDetailDto
                 {

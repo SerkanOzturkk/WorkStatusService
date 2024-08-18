@@ -10,5 +10,5 @@ public class EmployeeClaim : BaseEntity
     
 
     public Employee Employee { get; set; }
-    public Claim Claim { get; set; }
+    public OperationClaim Claim { get; set; }
 }

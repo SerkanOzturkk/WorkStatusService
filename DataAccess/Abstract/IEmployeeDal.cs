@@ -7,4 +7,5 @@ namespace Entities.Abstract;
 public interface IEmployeeDal : IEntityRepository<Employee>
 {
     List<EmployeeDetailDto> GetEmployeeDetails();
+    List<OperationClaim> GetClaims(Employee employee);
 }

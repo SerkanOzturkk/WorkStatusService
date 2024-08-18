@@ -55,5 +55,15 @@ namespace Business.Concrete
 
             return new SuccessResult(Messages.ProductDeleted);
         }
+
+        public List<OperationClaim> GetClaims(Employee employee)
+        {
+            return _employeeDal.GetClaims(employee);
+        }
+
+        public Employee GetByMail(string email)
+        {
+            return _employeeDal.Get(u => u.Email == email);
+        }
     }
 }

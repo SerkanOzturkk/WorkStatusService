@@ -23,4 +23,18 @@ public class EfEmployeeDal : EfEntityRepositoryBase<Employee, WorkStatusContext>
             return result.ToList();
         }
     }
+
+    public List<OperationClaim> GetClaims(Employee employee)
+    {
+        using (var context = new WorkStatusContext())
+        {
+            var result = from operationClaim in context.OperationClaims
+                join employeeClaim in context.EmployeeClaims
+                    on operationClaim.Id equals employeeClaim.Id
+                where employeeClaim.EmployeeId == employee.Id
+                select new OperationClaim { Id = operationClaim.Id, ClaimName = operationClaim.ClaimName };
+            return result.ToList();
+
+        }
+    }
 }

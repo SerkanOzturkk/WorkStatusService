@@ -22,26 +22,6 @@ namespace DataAccess.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Entities.Concrete.Claim", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("ClaimName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Claims", (string)null);
-                });
-
             modelBuilder.Entity("Entities.Concrete.Employee", b =>
                 {
                     b.Property<int>("Id")
@@ -53,9 +33,24 @@ namespace DataAccess.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("EmployeeName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("PasswordHash")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<byte[]>("PasswordSalt")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
 
                     b.Property<int>("TeamId")
                         .HasColumnType("int");
@@ -91,6 +86,26 @@ namespace DataAccess.Migrations
                     b.HasIndex("EmployeeId");
 
                     b.ToTable("EmployeeClaims", (string)null);
+                });
+
+            modelBuilder.Entity("Entities.Concrete.OperationClaim", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ClaimName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("OperationClaims", (string)null);
                 });
 
             modelBuilder.Entity("Entities.Concrete.Project", b =>
@@ -260,7 +275,7 @@ namespace DataAccess.Migrations
 
             modelBuilder.Entity("Entities.Concrete.EmployeeClaim", b =>
                 {
-                    b.HasOne("Entities.Concrete.Claim", "Claim")
+                    b.HasOne("Entities.Concrete.OperationClaim", "Claim")
                         .WithMany("EmployeeClaims")
                         .HasForeignKey("ClaimId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -337,11 +352,6 @@ namespace DataAccess.Migrations
                     b.Navigation("Task");
                 });
 
-            modelBuilder.Entity("Entities.Concrete.Claim", b =>
-                {
-                    b.Navigation("EmployeeClaims");
-                });
-
             modelBuilder.Entity("Entities.Concrete.Employee", b =>
                 {
                     b.Navigation("EmployeeClaims");
@@ -349,6 +359,11 @@ namespace DataAccess.Migrations
                     b.Navigation("Tasks");
 
                     b.Navigation("TimeLogs");
+                });
+
+            modelBuilder.Entity("Entities.Concrete.OperationClaim", b =>
+                {
+                    b.Navigation("EmployeeClaims");
                 });
 
             modelBuilder.Entity("Entities.Concrete.Project", b =>

@@ -3,7 +3,7 @@ using Entities.Concrete;
 
 namespace Entities.Abstract
 {
-    public interface IClaimDal : IEntityRepository<Claim>
+    public interface IClaimDal : IEntityRepository<OperationClaim>
     {
     }
 }
