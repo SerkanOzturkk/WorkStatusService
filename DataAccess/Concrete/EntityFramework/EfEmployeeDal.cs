@@ -18,7 +18,9 @@ public class EfEmployeeDal : EfEntityRepositoryBase<Employee, WorkStatusContext>
                 {
                     Id = e.Id,
                     EmployeeName = e.EmployeeName,
-                    TeamName = t.TeamName
+                    TeamName = t.TeamName,
+                    Email = e.Email,
+                    Status = e.Status
                 };
             return result.ToList();
         }

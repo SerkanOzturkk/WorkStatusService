@@ -11,13 +11,13 @@ public class EfProjectDal : EfEntityRepositoryBase<Project, WorkStatusContext>, 
     {
         using (WorkStatusContext context = new WorkStatusContext())
         {
-            var result = from p in context.Employees
+            var result = from p in context.Projects
                 join t in context.Teams
                     on p.TeamId equals t.Id
                 select new ProjectDetailDto
                 {
                     Id = p.Id,
-                    ProjectName = p.EmployeeName,
+                    ProjectName = p.ProjectName,
                     TeamName = t.TeamName
                 };
             return result.ToList();

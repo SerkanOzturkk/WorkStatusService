@@ -27,6 +27,17 @@ builder.Services.AddCors(options =>
 builder.Services.AddControllers();
 builder.Services.AddSingleton<IEmployeeService, EmployeeManager>();
 builder.Services.AddSingleton<IEmployeeDal, EfEmployeeDal>();
+builder.Services.AddSingleton<IProjectService, ProjectManager>();
+builder.Services.AddSingleton<IProjectDal, EfProjectDal>();
+builder.Services.AddSingleton<ITaskService, TaskManager>();
+builder.Services.AddSingleton<ITaskDal, EfTaskDal>();
+builder.Services.AddSingleton<ITeamService, TeamManager>();
+builder.Services.AddSingleton<ITeamDal, EfTeamDal>();
+builder.Services.AddSingleton<ITimeLogService, TimeLogManager>();
+builder.Services.AddSingleton<ITimeLogDal, EfTimeLogDal>();
+builder.Services.AddSingleton<IReportService, ReportManager>();
+builder.Services.AddSingleton<IReportDal, EfReportDal>();
+//Auth
 builder.Services.AddSingleton<ITokenHelper, JwtHelper>();
 builder.Services.AddSingleton<IAuthService, AuthManager>();
 

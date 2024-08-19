@@ -11,6 +11,8 @@ namespace Entities.DTOs
     {
         public int Id { get; set; }
         public string EmployeeName { get; set; }
+        public string Email { get; set; }
         public string TeamName { get; set; }
+        public bool Status { get; set; }
     }
 }
