@@ -11,6 +11,18 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+//React tarafýndan istek atýlmasýna izin verir
+// CORS ekle
+var myOrigins = "AllowAllOrigins";
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(myOrigins,
+        builder =>
+        {
+            builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+        });
+});
+
 //injection added
 builder.Services.AddControllers();
 builder.Services.AddSingleton<IEmployeeService, EmployeeManager>();
@@ -58,5 +70,23 @@ app.UseAuthorization();
 app.UseAuthentication();
 
 app.MapControllers();
+
+
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage();
+}
+
+
+app.UseRouting();
+
+// CORS kullan
+app.UseCors(builder =>
+{
+    builder.AllowAnyOrigin()
+        .AllowAnyMethod()
+        .AllowAnyHeader();
+});
 
 app.Run();

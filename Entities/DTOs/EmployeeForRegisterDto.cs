@@ -14,6 +14,5 @@ namespace Entities.DTOs
         public string FullName { get; set; }
         public int TeamId { get; set; }
         public DateTime CreatedDate { get; set; }
-        public bool Status { get; set; }
     }
 }

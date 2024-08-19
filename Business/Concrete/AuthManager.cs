@@ -1,14 +1,9 @@
 ﻿using Business.Abstract;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Business.Security.Hashing;
 using Business.Security.JWT;
 using Core.Utilities.Results;
 using Entities.Concrete;
 using Entities.DTOs;
-using Business.Security.Hashing;
 
 namespace Business.Concrete
 {
@@ -30,6 +25,8 @@ namespace Business.Concrete
             {
                 Email = employeeForRegisterDto.Email,
                 EmployeeName = employeeForRegisterDto.FullName,
+                TeamId = 1,
+                CreatedDate = DateTime.Now,
                 PasswordHash = passwordHash,
                 PasswordSalt = passwordSalt,
                 Status = true
@@ -51,7 +48,7 @@ namespace Business.Concrete
                 return new ErrorDataResult<Employee>("Parola hatası");
             }
 
-            return new SuccessDataResult<Employee>(userToCheck, "başarılı giriş");
+            return new SuccessDataResult<Employee>(userToCheck, "Başarılı giriş");
         }
 
         public IResult UserExists(string email)
