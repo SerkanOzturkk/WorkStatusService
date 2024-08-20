@@ -1,6 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constants;
 using Core.Utilities.Results;
+using DataAccess.Concrete.EntityFramework;
 using Entities.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
@@ -42,18 +43,31 @@ namespace Business.Concrete
             return new SuccessResult(Messages.ProductAdded);
         }
 
-        public IResult Update(Employee employee)
+        public IResult Update(UpdateEmployeeDto updateEmployeeDto)
         {
-            _employeeDal.Update(employee);
+            var employeeToUpdate = GetById(updateEmployeeDto.Id);
+            employeeToUpdate.Data.EmployeeName = updateEmployeeDto.EmployeeName;
+            employeeToUpdate.Data.Email = updateEmployeeDto.Email;
+            employeeToUpdate.Data.Status = updateEmployeeDto.Status;
+            employeeToUpdate.Data.TeamId = updateEmployeeDto.TeamId;
+
+            _employeeDal.Update(employeeToUpdate.Data);
 
             return new SuccessResult(Messages.ProductUpdated);
         }
 
-        public IResult Delete(Employee employee)
+        public IResult Delete(int teamId)
         {
-            _employeeDal.Delete(employee);
+            var result = GetById(teamId);
 
-            return new SuccessResult(Messages.ProductDeleted);
+            if (!result.Success || result.Data == null)
+            {
+                return new ErrorResult(Messages.TeamNotFound);
+            }
+
+            _employeeDal.Delete(result.Data);
+
+            return new SuccessResult(Messages.TeamNotFound);
         }
 
         public List<OperationClaim> GetClaims(Employee employee)

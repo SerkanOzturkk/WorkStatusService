@@ -8,6 +8,7 @@ namespace Business.Constants
 {
     public static class Messages
     {
+        public static string TeamNotFound = "Team not found";
         public static string AuthorizationDenied = "Yetkiniz yok";
         public static string CategoryLimitExceded = "Kategori limiti aşıldığı için yeni ürün eklenemiyor";
         public static string ProductNameAlreadyExists = "Bu isimde zaten başka bir ürün var";

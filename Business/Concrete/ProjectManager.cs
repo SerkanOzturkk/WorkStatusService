@@ -37,23 +37,39 @@ namespace Business.Concrete
             return new SuccessDataResult<Project>(_projectDal.Get(p => p.Id == projectId));
         }
 
-        public IResult Add(Project project)
+        public IResult Add(AddProjectDto addProjectDto)
         {
+            Project project = new Project();
+            project.ProjectName = addProjectDto.ProjectName;
+            project.TeamId = addProjectDto.TeamId;
+            project.CreatedDate = DateTime.Now;
+
             _projectDal.Add(project);
 
             return new SuccessResult(Messages.ProductAdded);
         }
 
-        public IResult Update(Project project)
+        public IResult Update(UpdateProjectDto updateProjectDto)
         {
-            _projectDal.Update(project);
+            var projectToUpdate = GetById(updateProjectDto.Id);
+            projectToUpdate.Data.ProjectName = updateProjectDto.ProjectName;
+            projectToUpdate.Data.TeamId = updateProjectDto.TeamId;
+
+            _projectDal.Update(projectToUpdate.Data);
 
             return new SuccessResult(Messages.ProductUpdated);
         }
 
-        public IResult Delete(Project project)
+        public IResult Delete(int projectId)
         {
-            _projectDal.Delete(project);
+            var projectToDelete = GetById(projectId);
+
+            if (!projectToDelete.Success || projectToDelete.Data == null)
+            {
+                return new ErrorResult(Messages.TeamNotFound);
+            }
+
+            _projectDal.Delete(projectToDelete.Data);
 
             return new SuccessResult(Messages.ProductDeleted);
         }

@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -60,5 +61,29 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result);
         }
+
+        [HttpDelete("delete")]
+        public IActionResult Delete(int employeeId)
+        {
+            var result = _employeeService.Delete(employeeId);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+        [HttpPut("update")]
+        public IActionResult Update(UpdateEmployeeDto updateEmployeeDto)
+        {
+
+            var result = _employeeService.Update(updateEmployeeDto);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
     }
 }

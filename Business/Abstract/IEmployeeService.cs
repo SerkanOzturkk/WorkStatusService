@@ -11,8 +11,8 @@ namespace Business.Abstract
         IDataResult<List<EmployeeDetailDto>> GetEmployeeDetails();
         IDataResult<Employee> GetById(int employeeId);
         IResult Add(Employee employee);
-        IResult Update(Employee employee);
-        IResult Delete(Employee employee);
+        IResult Update(UpdateEmployeeDto updateEmployeeDto);
+        IResult Delete(int employeeId);
         List<OperationClaim> GetClaims(Employee employee);
         Employee GetByMail(string email);
     }
