@@ -41,8 +41,17 @@ namespace Business.Concrete
             return new SuccessDataResult<Task>(_taskDal.Get(t => t.Id == taskId));
         }
 
-        public IResult Add(Task task)
+        public IResult Add(AddTaskDto addTaskDto)
         {
+            Task task = new Task();
+            task.TaskName = addTaskDto.TaskName;
+            task.ProjectId = addTaskDto.ProjectId;
+            task.AssignedEmployeeId = addTaskDto.AssignedEmployeeId;
+            task.Status = addTaskDto.Status;
+            //task.CompletionDate = addTaskDto.CompletionDate  (not completed yet)
+            task.ManagerApproval = false;
+            task.CreatedDate = DateTime.Now;
+
             _taskDal.Add(task);
 
             return new SuccessResult(Messages.ProductAdded);

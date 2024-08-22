@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Entities.DTOs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,6 +20,18 @@ namespace WebAPI.Controllers
         public IActionResult GetAll()
         {
             var result = _taskService.GetTaskDetails();
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+        [HttpPost("add")]
+        public IActionResult Add(AddTaskDto addTaskDto)
+        {
+
+            var result = _taskService.Add(addTaskDto);
             if (result.Success)
             {
                 return Ok(result);

@@ -10,7 +10,7 @@ public interface ITaskService
     IDataResult<List<Task>> GetAllByAssignedEmployeeId(int assignedEmployeeId);
     IDataResult<List<TaskDetailDto>> GetTaskDetails();
     IDataResult<Task> GetById(int taskId);
-    IResult Add(Task task);
+    IResult Add(AddTaskDto addTaskDto);
     IResult Update(Task task);
     IResult Delete(Task task);
 }
