@@ -57,18 +57,40 @@ namespace Business.Concrete
             return new SuccessResult(Messages.ProductAdded);
         }
 
-        public IResult Update(Task task)
+        public IResult Update(UpdateTaskDto updateTaskDto)
         {
-            _taskDal.Update(task);
+            var taskToUpdate = GetById(updateTaskDto.Id);
+            taskToUpdate.Data.TaskName = updateTaskDto.TaskName;
+            taskToUpdate.Data.ProjectId = updateTaskDto.ProjectId;
+            taskToUpdate.Data.AssignedEmployeeId = updateTaskDto.AssignedEmployeeId;
+            taskToUpdate.Data.Status = updateTaskDto.Status;
+            taskToUpdate.Data.ManagerApproval = updateTaskDto.ManagerApproval;
+            taskToUpdate.Data.CompletionDate = updateTaskDto.ManagerApproval ? DateTime.Now : (DateTime?)null;
+
+
+            _taskDal.Update(taskToUpdate.Data);
 
             return new SuccessResult(Messages.ProductUpdated);
         }
 
-        public IResult Delete(Task task)
+        public IResult Delete(int taskId)
         {
-            _taskDal.Delete(task);
+            var taskToDelete = GetById(taskId);
 
-            return new SuccessResult(Messages.ProductDeleted);
+            // Eğer takım bulunamazsa, hata döndürüyoruz
+            if (!taskToDelete.Success || taskToDelete.Data == null)
+            {
+                return new ErrorResult(Messages.TeamNotFound);
+            }
+
+            // Takımı silme işlemi
+            _taskDal.Delete(taskToDelete.Data);
+
+            return new SuccessResult(Messages.TeamNotFound);
+
         }
-    }
+
+
+            
+}
 }

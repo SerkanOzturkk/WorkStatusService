@@ -11,6 +11,6 @@ public interface ITaskService
     IDataResult<List<TaskDetailDto>> GetTaskDetails();
     IDataResult<Task> GetById(int taskId);
     IResult Add(AddTaskDto addTaskDto);
-    IResult Update(Task task);
-    IResult Delete(Task task);
+    IResult Update(UpdateTaskDto updateTaskDto);
+    IResult Delete(int taskId);
 }

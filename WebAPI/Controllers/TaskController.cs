@@ -38,5 +38,28 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result);
         }
+
+        [HttpDelete("delete")]
+        public IActionResult Delete(int taskId)
+        {
+            var result = _taskService.Delete(taskId);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+        [HttpPut("update")]
+        public IActionResult Update(UpdateTaskDto updateTaskDto)
+        {
+
+            var result = _taskService.Update(updateTaskDto);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
     }
 }
