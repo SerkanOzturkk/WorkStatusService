@@ -26,9 +26,9 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Task>>(_taskDal.GetAll(), Messages.ProductsListed);
         }
 
-        public IDataResult<List<Task>> GetAllByAssignedEmployeeId(int assignedEmployeeId)
+        public IDataResult<List<GetTaskDto>> GetAllByAssignedEmployeeId(int assignedEmployeeId)
         {
-            return new SuccessDataResult<List<Task>>(_taskDal.GetAll(t => t.AssignedEmployeeId == assignedEmployeeId));
+            return new SuccessDataResult<List<GetTaskDto>>(_taskDal.GetTasksByEmployeeId(assignedEmployeeId));
         }
 
         public IDataResult<List<TaskDetailDto>> GetTaskDetails()

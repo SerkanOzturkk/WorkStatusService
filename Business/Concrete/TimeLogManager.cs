@@ -40,8 +40,16 @@ namespace Business.Concrete
             return new SuccessDataResult<TimeLog>(_timeLogDal.Get(p => p.Id == timelogId));
         }
 
-        public IResult Add(TimeLog timeLog)
+        public IResult Add(AddTimeLogDto addTimeLogDto)
         {
+            TimeLog timeLog = new TimeLog();
+            timeLog.EmployeeId = addTimeLogDto.EmployeeId;
+            timeLog.TaskId = addTimeLogDto.TaskId;
+            timeLog.Date = addTimeLogDto.Date;
+            timeLog.HoursWorked = addTimeLogDto.HoursWorked;
+            timeLog.OvertimeHours = addTimeLogDto.OvertimeHours;
+            timeLog.CreatedDate = DateTime.Now;
+
             _timeLogDal.Add(timeLog);
 
             return new SuccessResult(Messages.ProductAdded);

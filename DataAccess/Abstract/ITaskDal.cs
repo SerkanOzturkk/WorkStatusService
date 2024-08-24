@@ -8,4 +8,5 @@ namespace Entities.Abstract;
 public interface ITaskDal : IEntityRepository<Task>
 {
     List<TaskDetailDto> GetTaskDetails();
+    List<GetTaskDto> GetTasksByEmployeeId(int employeeId);
 }

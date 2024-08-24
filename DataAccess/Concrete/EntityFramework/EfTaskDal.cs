@@ -29,4 +29,28 @@ public class EfTaskDal : EfEntityRepositoryBase<Task, WorkStatusContext>, ITaskD
             return result.ToList();
         }
     }
+
+    public List<GetTaskDto> GetTasksByEmployeeId(int employeeId)
+    {
+        using (WorkStatusContext context = new WorkStatusContext())
+        {
+            var result = from t in context.Tasks
+                join p in context.Projects
+                    on t.ProjectId equals p.Id
+                join e in context.Employees
+                    on t.AssignedEmployeeId equals e.Id
+                         where t.AssignedEmployeeId == employeeId
+                select new GetTaskDto
+                {
+                    Id = t.Id,
+                    TaskName = t.TaskName,
+                    ProjectName = p.ProjectName,
+                    AssignedEmployeeName = e.EmployeeName,
+                    Status = t.Status,
+                    CompletionDate = t.CompletionDate,
+                    ManagerApproval = t.ManagerApproval
+                };
+            return result.ToList();
+        }
+    }
 }

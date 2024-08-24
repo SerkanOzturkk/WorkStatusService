@@ -48,6 +48,7 @@ namespace DataAccess.Concrete.EntityFramework
                 .HasOne(p => p.Team)
                 .WithMany(t => t.Projects)
                 .HasForeignKey(p => p.TeamId);
+                
 
             modelBuilder.Entity<Task>()
                 .HasOne(t => t.Project)

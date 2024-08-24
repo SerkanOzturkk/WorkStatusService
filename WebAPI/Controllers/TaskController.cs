@@ -61,5 +61,17 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result);
         }
+
+        [HttpGet("getbyassignedemployeeid")]
+        public IActionResult GetAllByAssignedEmployeeId(int assignedEmployeeId)
+        {
+            var result = _taskService.GetAllByAssignedEmployeeId(assignedEmployeeId);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
     }
 }

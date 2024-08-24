@@ -11,7 +11,7 @@ public interface ITimeLogService
     IDataResult<List<TimeLog>> GetAllByTaskId(int taskId);
     IDataResult<List<TimeLogDetailDto>> GetTimeLogDetails();
     IDataResult<TimeLog> GetById(int timelogId);
-    IResult Add(TimeLog timeLog);
+    IResult Add(AddTimeLogDto addTimeLogDto);
     IResult Update(TimeLog timeLog);
     IResult Delete(TimeLog timeLog);
 }
