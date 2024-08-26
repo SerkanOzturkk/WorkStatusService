@@ -2,6 +2,7 @@ using Business.Abstract;
 using Business.Concrete;
 using Business.Security.Encryption;
 using Business.Security.JWT;
+using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
 using Entities.Abstract;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -37,6 +38,8 @@ builder.Services.AddSingleton<ITimeLogService, TimeLogManager>();
 builder.Services.AddSingleton<ITimeLogDal, EfTimeLogDal>();
 builder.Services.AddSingleton<IReportService, ReportManager>();
 builder.Services.AddSingleton<IReportDal, EfReportDal>();
+builder.Services.AddSingleton<ITaskStatusService, TaskStatusManager>();
+builder.Services.AddSingleton<ITaskStatusDal, EfTaskStatusDal>();
 //Auth
 builder.Services.AddSingleton<ITokenHelper, JwtHelper>();
 builder.Services.AddSingleton<IAuthService, AuthManager>();
