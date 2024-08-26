@@ -13,6 +13,7 @@ namespace Business.Abstract
     {
         IDataResult<List<Team>> GetAll();
         IDataResult<Team> GetById(int teamId);
+        IDataResult<List<TeamDetailDto>> GetTeamDetails();
         IResult Add(AddTeamDto addTeamDto);
         IResult Update(UpdateTeamDto updateTeamDto);
         IResult Delete(int teamId);

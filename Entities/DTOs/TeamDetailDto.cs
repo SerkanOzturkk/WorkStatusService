@@ -7,10 +7,10 @@ using Core.Entities;
 
 namespace Entities.DTOs
 {
-    public class UpdateTeamDto : IDto
+    public class TeamDetailDto : IDto
     {
         public int Id { get; set; }
         public string TeamName { get; set; }
-        public int? TeamLeaderId { get; set; }
+        public string TeamLeaderName { get; set; }
     }
 }

@@ -2,6 +2,7 @@
 using Entities.Abstract;
 using Entities.DTOs;
 using Task = Entities.Concrete.Task;
+using TaskStatus = Entities.Concrete.TaskStatus;
 
 namespace DataAccess.Concrete.EntityFramework;
 
@@ -16,13 +17,14 @@ public class EfTaskDal : EfEntityRepositoryBase<Task, WorkStatusContext>, ITaskD
                     on t.ProjectId equals p.Id
                 join e in context.Employees
                     on t.AssignedEmployeeId equals e.Id
+                join ts in context.TaskStatuses on t.TaskStatusId equals ts.Id 
                 select new TaskDetailDto
                 {
                     Id = t.Id,
                     TaskName = t.TaskName,
                     ProjectName = p.ProjectName,
                     AssignedEmployeeName = e.EmployeeName,
-                    Status = t.Status,
+                    StatusName = ts.StatusName,
                     CompletionDate = t.CompletionDate,
                     ManagerApproval = t.ManagerApproval
                 };
@@ -39,6 +41,7 @@ public class EfTaskDal : EfEntityRepositoryBase<Task, WorkStatusContext>, ITaskD
                     on t.ProjectId equals p.Id
                 join e in context.Employees
                     on t.AssignedEmployeeId equals e.Id
+                join ts in context.TaskStatuses on t.TaskStatusId equals ts.Id 
                          where t.AssignedEmployeeId == employeeId
                 select new GetTaskDto
                 {
@@ -46,7 +49,7 @@ public class EfTaskDal : EfEntityRepositoryBase<Task, WorkStatusContext>, ITaskD
                     TaskName = t.TaskName,
                     ProjectName = p.ProjectName,
                     AssignedEmployeeName = e.EmployeeName,
-                    Status = t.Status,
+                    TaskStatusName = ts.StatusName,
                     CompletionDate = t.CompletionDate,
                     ManagerApproval = t.ManagerApproval
                 };

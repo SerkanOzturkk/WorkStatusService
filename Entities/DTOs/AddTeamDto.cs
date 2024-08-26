@@ -10,5 +10,6 @@ namespace Entities.DTOs
     public class AddTeamDto : IDto
     {
         public string TeamName { get; set; }
+        public int? TeamLeaderId { get; set; }
     }
 }

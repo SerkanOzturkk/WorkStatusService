@@ -1,6 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constants;
 using Core.Utilities.Results;
+using DataAccess.Concrete.EntityFramework;
 using Entities.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
@@ -25,10 +26,16 @@ namespace Business.Concrete
             return new SuccessDataResult<Team>(_teamDal.Get(e => e.Id == teamId));
         }
 
+        public IDataResult<List<TeamDetailDto>> GetTeamDetails()
+        {
+            return new SuccessDataResult<List<TeamDetailDto>>(_teamDal.GetTeamDetails());
+        }
+
         public IResult Add(AddTeamDto addTeamDto)
         {
             Team team = new Team();
             team.TeamName = addTeamDto.TeamName;
+            team.TeamLeaderId = addTeamDto.TeamLeaderId;
             team.CreatedDate = DateTime.Now;
 
             _teamDal.Add(team);
@@ -40,6 +47,7 @@ namespace Business.Concrete
         {
             var teamToUpdate = GetById(updateTeamDto.Id);
             teamToUpdate.Data.TeamName = updateTeamDto.TeamName;
+            teamToUpdate.Data.TeamLeaderId = updateTeamDto.TeamLeaderId;
 
             _teamDal.Update(teamToUpdate.Data);
 

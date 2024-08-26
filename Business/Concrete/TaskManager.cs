@@ -47,7 +47,7 @@ namespace Business.Concrete
             task.TaskName = addTaskDto.TaskName;
             task.ProjectId = addTaskDto.ProjectId;
             task.AssignedEmployeeId = addTaskDto.AssignedEmployeeId;
-            task.Status = addTaskDto.Status;
+            task.TaskStatusId = addTaskDto.TaskStatusId;
             //task.CompletionDate = addTaskDto.CompletionDate  (not completed yet)
             task.ManagerApproval = false;
             task.CreatedDate = DateTime.Now;
@@ -63,7 +63,7 @@ namespace Business.Concrete
             taskToUpdate.Data.TaskName = updateTaskDto.TaskName;
             taskToUpdate.Data.ProjectId = updateTaskDto.ProjectId;
             taskToUpdate.Data.AssignedEmployeeId = updateTaskDto.AssignedEmployeeId;
-            taskToUpdate.Data.Status = updateTaskDto.Status;
+            taskToUpdate.Data.TaskStatusId = updateTaskDto.TaskStatusId;
             taskToUpdate.Data.ManagerApproval = updateTaskDto.ManagerApproval;
             taskToUpdate.Data.CompletionDate = updateTaskDto.ManagerApproval ? DateTime.Now : (DateTime?)null;
 

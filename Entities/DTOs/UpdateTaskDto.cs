@@ -13,7 +13,7 @@ namespace Entities.DTOs
         public string TaskName { get; set; }
         public int ProjectId { get; set; }
         public int AssignedEmployeeId { get; set; }
-        public string Status { get; set; }
+        public int TaskStatusId { get; set; }
         public bool ManagerApproval { get; set; }
     }
 }

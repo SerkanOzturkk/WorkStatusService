@@ -13,7 +13,7 @@ namespace Entities.DTOs
         public string TaskName { get; set; }
         public string ProjectName { get; set; }
         public string AssignedEmployeeName { get; set; }
-        public string Status { get; set; }
+        public string TaskStatusName { get; set; }
         public DateTime? CompletionDate { get; set; }
         public bool ManagerApproval { get; set; }
     }

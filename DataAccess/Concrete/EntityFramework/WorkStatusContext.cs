@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Entities.Concrete;
 using Microsoft.EntityFrameworkCore;
 using Task = Entities.Concrete.Task;
+using TaskStatus = Entities.Concrete.TaskStatus;
 
 
 namespace DataAccess.Concrete.EntityFramework
@@ -16,6 +17,7 @@ namespace DataAccess.Concrete.EntityFramework
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Project> Projects { get; set; }
         public DbSet<Task> Tasks { get; set; }
+        public DbSet<TaskStatus> TaskStatuses { get; set; }  // Yeni TaskStatus tablosu
         public DbSet<TimeLog> TimeLogs { get; set; }
         public DbSet<Report> Reports { get; set; }
         public DbSet<OperationClaim> OperationClaims { get; set; }
@@ -38,6 +40,7 @@ namespace DataAccess.Concrete.EntityFramework
             modelBuilder.Entity<Report>().ToTable("Reports");
             modelBuilder.Entity<OperationClaim>().ToTable("OperationClaims");
             modelBuilder.Entity<EmployeeClaim>().ToTable("EmployeeClaims");
+            modelBuilder.Entity<TaskStatus>().ToTable("TaskStatuses");
 
             modelBuilder.Entity<Employee>()
                 .HasOne(e => e.Team)
@@ -81,6 +84,18 @@ namespace DataAccess.Concrete.EntityFramework
                 .HasOne(ec => ec.Claim)
                 .WithMany(c => c.EmployeeClaims)
                 .HasForeignKey(ec => ec.ClaimId);
+
+            // Yeni ilişki tanımı: Team ve TeamLeader
+            modelBuilder.Entity<Team>()
+                .HasOne(t => t.TeamLeader)
+                .WithMany()
+                .HasForeignKey(t => t.TeamLeaderId)
+                .OnDelete(DeleteBehavior.Restrict); // Veya başka bir uygun silme davranışı
+
+            modelBuilder.Entity<Task>()
+                .HasOne(t => t.TaskStatus)
+                .WithMany(ts => ts.Tasks)
+                .HasForeignKey(t => t.TaskStatusId);
         }
 
     }
